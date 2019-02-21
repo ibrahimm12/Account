@@ -65,8 +65,16 @@ public class MainView extends VerticalLayout {
 
             @Override
             public void onComponentEvent(SucceededEvent event) {
-                System.out.println(event.getFileName());
-              System.out.println(counter.getCSVString());
+               // System.out.println(event.getFileName());
+             // System.out.println(counter.getCSVString());
+		
+  		String [] lines=  counter.getCSVString().split("\n");
+                for (String line : lines){
+
+                    System.out.println(line);
+                }
+
+
 
                //FileOutputStream outputStream = null;
                 try {
