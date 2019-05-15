@@ -2,30 +2,25 @@ package hello;
 
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.SucceededEvent;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.router.Route;
-import com.vaadin.server.Page;
-import com.vaadin.ui.Notification;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 @Route
+
 public class MainView extends VerticalLayout {
 
-    private final AccountRepository repository;
-    private final UploadController uploadController;
+    private final AccountService service;
+   // private final UploadController uploadController;
 
 
 
     //private final AccountEditor editor;
 
-    final Grid<Account> grid;
+     Grid<Account> grid ;
+
 
    private UploadController.LineBreakCounter counter = new UploadController.LineBreakCounter();
 
@@ -34,9 +29,9 @@ public class MainView extends VerticalLayout {
 
 
 
-    public MainView( AccountRepository repository,UploadController uploadController    ) {
-            this.repository = repository;
-            this.uploadController = uploadController;
+    public MainView( AccountService service    ) {
+            this.service = service;
+         //   this.uploadController = uploadController;
 
 
 
@@ -48,52 +43,51 @@ public class MainView extends VerticalLayout {
 
 
         // build layout
-        HorizontalLayout actions = new HorizontalLayout(upload);
+        VerticalLayout actions = new VerticalLayout(grid,upload);
+
         add(actions, grid);
-        upload.getDropLabel();
 
 
-        grid.setHeight("300px");
-        grid.setColumns("id","entryDate","valueDate","paymentDate","amount","beneficiary","accountNumber","referenceNumber","originatorsNumber","messageCardNumber","receipt");
-        grid.getColumnByKey("id").setWidth("150px").setFlexGrow(0);
+      grid.setHeight("300px");
+       grid.setColumns("id","entryDate","valueDate","paymentDate","amount","beneficiary","accountNumber","referenceNumber","originatorsReference","messageCardNumber","receipt");
+      grid.getColumnByKey("id").setWidth("150px").setFlexGrow(0);
+      // grid.setSizeFull();
+      // grid.addColumn(s->s);
 
 
 
        upload.addSucceededListener(new ComponentEventListener<SucceededEvent>() {
 
-            public File file;
+
 
             @Override
             public void onComponentEvent(SucceededEvent event) {
-               // System.out.println(event.getFileName());
-             // System.out.println(counter.getCSVString());
-		
-  		String [] lines=  counter.getCSVString().split("\n");
-                for (String line : lines){
+              //  System.out.println(event.getFileName());
 
-                    System.out.println(line);
-                }
+                String [] lines=  counter.getCSVString().split(",");
+
+                for (String line : lines) {
 
 
-
-               //FileOutputStream outputStream = null;
-                try {
-                    FileOutputStream  outputStream  =  new FileOutputStream("C:\\Users\\SSL\\Documents\\A-TULKAUS\\9\\here.csv"  );
-
-                    byte[] strToBytes = counter.getCSVString().getBytes();
-                    try {
-                        outputStream.write(counter.getCSVString().getBytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-
-                }catch (final java.io.FileNotFoundException e) {
-                     new Notification("Could not open file <br/>", e.getMessage(), Notification.Type.ERROR_MESSAGE).show(Page.getCurrent());
+                    //System.out.println(line);
+                    Account c = new Account();
+                    c.setEntryDate(lines[0]);
+                    c.setValueDate(lines[1]);
+                    c.setPaymentDate(lines[2]);
+                    c.setAmount(lines[3]);
+                    c.setBeneficiary(lines[4]);
+                    c.setAccountNumber(lines[5]);
+                    c.setReferenceNumber(lines[6]);
+                    c.setOriginatorsReference(lines[7]);
+                    c.setMessageCardNumber(lines[8]);
+                    c.setReceipt(lines[9]);
+                    service.save(c);
 
 
                 }
+
+
+
 
             }
         });
@@ -110,11 +104,11 @@ public class MainView extends VerticalLayout {
     // tag::listCustomers[]
     void listAccounts(String filterText) {
         if (StringUtils.isEmpty(filterText)) {
-            grid.setItems(repository.findAll());
+            grid.setItems(service.findById());
 
         }
         else {
-            grid.setItems(repository.findByAccountNumberStartsWithIgnoreCase(filterText));
+            grid.setItems(service.findByReferenceNumberStartsWithIgnoreCase(filterText));
         }
     }
 

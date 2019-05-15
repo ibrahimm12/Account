@@ -7,8 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Optional;
-
 
 @SpringBootApplication
 public class Application {
@@ -22,37 +20,38 @@ public class Application {
 
 
 	@Bean
-	public CommandLineRunner loadData(AccountRepository repository ) {
+	public CommandLineRunner loadData(AccountService service ) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new Account("Jack", "Bauer", "iekjsdkj", "4uu4h4kj", "43434", "3444", "rfdgdf", "dfgf", "fgsdf", "fdsg"));
-
+			//repository.save(new Account("07.11.2018", "07.11.2018", "07.11.2018", "450€", "950€", "FI8000168542302", "25-445", "1289-8555", "Loan", "Ibrahim"));
+			//repository.save(new Account("08.12.2018", "03.10.2019", "07.11.2018", "1450€", "950€", "FI8000168642302", "26-345", "5489-8555", "Palkka", "Mohamed"));
+			//repository.save(new Account("08.12.2018", "03.10.2019", "07.11.2018", "1450€", "950€", "FI8000168642302", "26-345", "5489-8555", "Palkka", "Suleiman"));
 
 
 			// fetch all customers
-			log.info("Customers found with findAll():");
+		/*	log.info("Customers found with findAll():");
 			log.info("-------------------------------");
-			for (Account account : repository.findAll()) {
-				log.info(account.toString());
-			}
+		for (Account account : service.findAll()) {
+		log.info(account.toString());
+	}
 			log.info("");
 
-			// fetch an individual account by ID
-			Optional<Account> account = repository.findById(1L);
-			log.info("Accounts found with findOne(1L):");
-			log.info("--------------------------------");
-			log.info(account.toString());
-			log.info("");
+	fetch an individual account by ID
+	Account account = service.findById(1L);
+		log.info("Accounts found with findOne(1L):");
+		log.info("--------------------------------");
+		log.info(account.toString());
+		log.info("");*//*
 
-			// fetch customers by last name
-			log.info("Accounts found with findByReferenceNumberStartsWithIgnoreCase('easy'):");
-			log.info("--------------------------------------------");
-			for (Account easy : repository
-					.findByAccountNumberStartsWithIgnoreCase("3444")) {
-				log.info(easy.toString());
-			}
-			log.info("");
-		};
+	// fetch customers by last name
+		log.info("Accounts found with findByReferenceNumberStartsWithIgnoreCase('easy'):");
+		log.info("--------------------------------------------");
+		for (Account easy : service
+			.findByReferenceNumberStartsWithIgnoreCase("")) {
+		log.info(easy.toString());
+	}
+		log.info("");*/
+};
 	}
 }
 

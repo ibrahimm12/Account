@@ -35,22 +35,37 @@ dependencyManagement {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.vaadin/vaadin-server
-    compile group: 'com.vaadin', name: 'vaadin-server', version: '8.5.2'
-    compile group: 'com.vaadin', name: 'vaadin-spring', version: '10.0.4'
+  //  compile group: 'com.vaadin', name: 'vaadin-server', version: '8.5.2'
+   // compile group: 'com.vaadin', name: 'vaadin-spring', version: '10.0.4'
+   // compile group: 'com.vaadin', name: 'vaadin-bom', version: '10.0.10'
+    // https://mvnrepository.com/artifact/com.vaadin/vaadin-push
+    //compile group: 'com.vaadin', name: 'vaadin-push', version: '8.7.2'
+    // https://mvnrepository.com/artifact/com.vaadin/flow-server
+  //  compile group: 'com.vaadin', name: 'flow-server', version: '1.4.4'
+
+
+
 
     //compile group: 'org.springframework.batch', name: 'spring-batch-integration', version: '1.2.1.RELEASE'
-
-
-
 
     // https://mvnrepository.com/artifact/org.vaadin.spring/spring-vaadin
     compile group: 'com.vaadin', name: 'com.vaadin.spring.roo.annotations', version: '1.1.1'
     compile group: 'com.vaadin', name: 'vaadin-notification-flow', version: '1.0.3'
+    // https://mvnrepository.com/artifact/com.vaadin/vaadin-maven-plugin
+   // compile group: 'com.vaadin', name: 'vaadin-maven-plugin', version: '13.0.5'
+    // https://mvnrepository.com/artifact/com.vaadin/flow-server-production-mode
+    compile group: 'com.vaadin', name: 'flow-server-production-mode', version: '1.4.4'
+    // https://mvnrepository.com/artifact/com.vaadin/vaadin-grid-flow
+    compile group: 'com.vaadin', name: 'vaadin-grid-flow', version: '3.0.4'
+
+
+
 
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.vaadin:vaadin-spring-boot-starter")
-    //compile 'mysql:mysql-connector-java'
-    compile("com.h2database:h2")
+   compile 'mysql:mysql-connector-java'
+    compile group: 'com.vaadin', name: 'vaadin', version: '12.0.3'
+   // compile("com.h2database:h2")
     testCompile("junit:junit")
  testCompile("org.springframework.boot:spring-boot-starter-test")
 }

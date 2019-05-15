@@ -5,29 +5,29 @@ import javax.persistence.*;
 @Entity
 public class Account {
 
+    @Column(nullable = true)
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
-
-  //  @Column( name = " entry_date" , length = 255)
+    @Column( name = " entry_date")
     private String entryDate;
-  //  @Column( name = " value_date" , length = 255)
+    @Column( name = " value_date" )
     private String valueDate;
-  //  @Column( name = " payment_date" , length = 255)
+    @Column( name = " payment_date" )
     private String paymentDate;
-  //  @Column( name = " amount" , length = 255)
+    @Column( name = " amount" )
     private String amount;
-  //  @Column( name = " beneficiary" , length = 255)
+    @Column( name = " beneficiary" )
     private String beneficiary;
-   // @Column( name = " account_number" , length = 255)
+    @Column( name = " account_number" )
     private String accountNumber;
-  //  @Column( name = " reference_number" , length = 255)
+    @Column( name = " reference_number" )
     private String referenceNumber;
-  //  @Column( name = " originators_number" , length = 255)
-    private String originatorsNumber;
-   // @Column( name = " message_card_number" , length = 255)
+    @Column( name = " originators_number")
+    private String originatorsReference;
+    @Column( name = " message_card_number" )
     private String messageCardNumber;
-    //@Column( name = " receipt" , length = 255)
+    @Column( name = " receipt" )
     private String receipt;
 
     protected Account(){
@@ -42,7 +42,7 @@ public class Account {
                     String beneficiary,
                     String accountNumber,
                     String referenceNumber,
-                    String originatorsNumber,
+                    String originatorsReference,
                     String messageCardNumber,
                     String receipt) {
 
@@ -53,7 +53,7 @@ public class Account {
         this.beneficiary = beneficiary;
         this.accountNumber = accountNumber;
         this.referenceNumber = referenceNumber;
-        this.originatorsNumber = originatorsNumber;
+        this.originatorsReference = originatorsReference;
         this.messageCardNumber = messageCardNumber;
         this.receipt = receipt;
     }
@@ -121,12 +121,12 @@ public class Account {
         this.referenceNumber = referenceNumber;
     }
 
-    public String getOriginatorsNumber() {
-        return originatorsNumber;
+    public String getOriginatorsReference() {
+        return originatorsReference;
     }
 
-    public void setOriginatorsNumber(String originatorsNumber) {
-        this.originatorsNumber = originatorsNumber;
+    public void setOriginatorsReference(String originatorsReference) {
+        this.originatorsReference = originatorsReference;
     }
 
     public String getMessageCardNumber() {
@@ -147,7 +147,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("Account[id=%d,  entryDate='%s',   valueDate='%s',   paymentDate='%s', amount='%s',  beneficiary='%s',  accountNumber='%s',  referenceNumber='%s',  originatorsNumber='%s', messageCardNumber='%s', receipt='%s' ]",
+        return String.format("Account[id=%d,  entryDate='%s',   valueDate='%s',   paymentDate='%s', amount='%s',  beneficiary='%s',  accountNumber='%s',  referenceNumber='%s',  originatorsReference='%s', messageCardNumber='%s', receipt='%s' ]",
                 id,
                 entryDate,
                 valueDate,
@@ -156,7 +156,7 @@ public class Account {
                 beneficiary,
                 accountNumber,
                 referenceNumber,
-                originatorsNumber,
+                originatorsReference,
                 messageCardNumber,
                 receipt );
     }
